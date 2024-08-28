@@ -1,6 +1,6 @@
 SALVADOR LA VALLE
 
-Comisión 62020
+CoderHouse - Comisión #62020
 
 Página de simulación de peleas de Digimons. 
 
