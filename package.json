@@ -1,0 +1,17 @@
+{
+  "name": "entrega-final-digimon",
+  "version": "1.0.0",
+  "description": "Colección de Digimons y sencillo simulador de combates",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "Salvador La Valle",
+  "license": "ISC",
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "sweetalert2": "^11.12.4"
+  }
+}

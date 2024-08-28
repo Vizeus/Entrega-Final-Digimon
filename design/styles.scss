@@ -1,3 +1,6 @@
+// your-app.scss
+@import '@sweetalert2/themes/dark/dark.scss';
+
 body {
     background: linear-gradient(to bottom, #25c4e0, #1e2bdd);
     background-attachment: fixed;
@@ -22,52 +25,61 @@ body {
     }
 
     button {
+        border: 3px outset; 
         padding: 10px 20px;
         font-size: 16px;
         color: white;
-        background-color: grey;
-        border: none;
+        background-color: rgb(128, 128, 128);
         border-radius: 5px;
         cursor: pointer;
+        &:active {
+          border: 3px inset; 
+          border-radius: 5px;
+        }
     }
 
     .nivel-japon {
-        width: 50px;
-        height: 30px;
-        background-image: url('../img/Japon.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+      border: 3px outset; 
+      width: 50px;
+      height: 30px;
+      background-image: url('../img/Japon.png');
+      background-size: cover;
+      background-position: center;
+      &:active {
+        border: 3px inset; 
+      }
     }
 
     .nivel-eeuu {
+        border: 3px outset; 
         width: 50px;
         height: 30px;
         background-image: url('../img/EEUU.png');
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        &:active {
+          border: 3px inset; 
+        }
     }
 }
   
-  // Estilos para la lista
   #listado-digimons {
-    display: flex; // Usa Flexbox para alinear los elementos
-    justify-content: center; // Centra horizontalmente los elementos <li>
-    flex-wrap: wrap; // Permite que los elementos <li> se envuelvan si no caben en una sola línea
-    padding: 0; // Elimina el padding predeterminado del <ul>
-    margin: 0; // Elimina el margen predeterminado del <ul>
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    padding: 0; 
+    margin: 0; 
   
     li {
-      background-color: #ffffff; // Fondo de los elementos <li>
-      text-align: center; // Centra el texto dentro de cada <li>
-      list-style-type: none; // Elimina las viñetas predeterminadas
-      margin: 10px; // Agrega espacio superior/inferior con 10px de margen
-      padding: 15px; // Aumenta el padding a 15px
-      border: 1px solid #ccc; // Color del borde unificado
-      border-radius: 8px; // Borde redondeado de 8px
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Sombra alrededor de los elementos
-      transition: transform 0.3s ease, box-shadow 0.3s ease; // Transiciones suaves
+      background-color: #ffffff; 
+      text-align: center; 
+      list-style-type: none; 
+      margin: 10px; 
+      padding: 15px; 
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
   
       img {
         width: 150px;
@@ -75,15 +87,15 @@ body {
       }
   
       &:hover {
-        transform: translateY(-8px); // Mueve la carta ligeramente hacia arriba
-        box-shadow: 0 8px 16px rgb(0, 0, 0); // Aumenta la sombra para darle un efecto de elevación
+        transform: translateY(-8px); 
+        box-shadow: 0 8px 16px rgb(0, 0, 0); 
       }
   
       &.seleccionado {
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0);
-        animation: cambio-color-borde 5s infinite, flotacion 1.7s infinite; // Aplica ambas animaciones
-        border: 2px solid rgb(218, 8, 8); // Estilo de borde (ancho, tipo, color)
+        animation: cambio-color-borde 6s infinite, flotacion 1.7s infinite;
+        border: 4px solid rgb(218, 8, 8); 
       }
     }
   }
@@ -97,9 +109,11 @@ body {
 
 // Animación para cambiar el color del borde
 @keyframes cambio-color-borde {
-    0% { border-color: rgba(255, 0, 0, 0.7); } // Color rojo inicial
-    25% { border-color: rgba(0, 255, 0, 0.7); } // Color verde
-    50% { border-color: rgba(0, 0, 255, 0.7); } // Color azul
-    75% { border-color: rgba(0, 217, 255, 0.7); } // Color magenta
+    0% { border-color: rgba(255, 0, 0, 0.7); } 
+    20% { border-color: rgba(0, 255, 0, 0.7); } 
+    40% { border-color: rgba(0, 0, 255, 0.7); }
+    60% { border-color: rgba(0, 217, 255, 0.7); }
+    80% { border-color: rgba(239, 255, 17, 0.842); } 
+    90% { border-color: rgba(255, 0, 0, 0.7); } 
 }
   

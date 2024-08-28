@@ -26,7 +26,7 @@ const traduccionAtributos = {
     'Unknown': 'Desconocido ❓',
 };
 
-// Mapeo de niveles para cambio de sistema de clasificación
+// Mapeo de niveles para el cambio de sistema de clasificación de niveles
 const nivelesAlternativos = {
     'Baby I': 'Fresh/Slime',
     'Baby II': 'In-Training',
@@ -153,12 +153,12 @@ async function crearListaDeDigimons() {
 
             // Creamos la "carta" del digimon
             elementoLista.innerHTML = `
-                <h4>ID: ${digimon.id}</h4>
-                <p>Nombre: ${digimon.name}</p>
+                <h4>${digimon.name}</h4>
+                <p>ID: ${digimon.id}</p>
                 <p>Nivel: ${nivel}</p>
                 <p>Tipo: ${atributoTraducido}</p>
                 <img src="${digimon.image}" alt="${digimon.name}">`;
-
+                
             // Agregamos el manejador de eventos al <li>
             elementoLista.addEventListener('click', () => {
                 elementoLista.classList.toggle('seleccionado');
@@ -311,9 +311,9 @@ function determinarGanador(tipo1, tipo2, nivel1, nivel2) {
     console.log("----------------------------------------------------------------------")
 
     if (random < probabilidadAjustada) {
-        return seleccionados[0].querySelector(':nth-child(2)').textContent.split(': ')[1];
+        return seleccionados[0].querySelector(':nth-child(1)').textContent;
     } else {
-        return seleccionados[1].querySelector(':nth-child(2)').textContent.split(': ')[1];
+        return seleccionados[1].querySelector(':nth-child(1)').textContent;
     }
 }
 
