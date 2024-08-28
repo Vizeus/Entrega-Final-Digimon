@@ -9,9 +9,5 @@
   "keywords": [],
   "type": "module",
   "author": "Salvador La Valle",
-  "license": "ISC",
-  "dependencies": {
-    "animate.css": "^4.1.1",
-    "sweetalert2": "^11.12.4"
-  }
+  "license": "ISC"
 }
