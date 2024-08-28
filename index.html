@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digimon</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="./main.js"></script>
+    <link rel="stylesheet" href="./design/styles.css"/>
+</head>
+
+<body>
+
+<!-- Barra de navegación sticky -->
+<nav id="navbar">
+    <img src="./img/DigimonLogo.png" alt="Logo de Digimon" title="Este es un botón">
+    <button id="cambiar-niveles" class="nivel-japon" title="Cambiar clasificacion de niveles"></button>
+    <p>Elige 2 digimons con los que quieras simular un combate</p>
+    <!-- Botón para iniciar combate -->
+    <button id="iniciar-combate">Iniciar Combate</button>
+
+    <label for="carga">Progreso de la carga de Digimons</label>
+    <progress id="carga" value="" max=""></progress>
+</nav>
+
+<!-- Listado de Digimons -->
+<ul id="listado-digimons"></ul>
+
+</body>
+
+</html>

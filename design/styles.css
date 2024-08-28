@@ -1,0 +1,106 @@
+body {
+  background: linear-gradient(to bottom, #25c4e0, #1e2bdd);
+  background-attachment: fixed;
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
+
+#navbar {
+  position: sticky;
+  top: 0;
+  background-color: #f0f0f0;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+#navbar img {
+  width: 170px;
+  height: 80px;
+}
+#navbar button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: grey;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#navbar .nivel-japon {
+  width: 50px;
+  height: 30px;
+  background-image: url("../img/Japon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#navbar .nivel-eeuu {
+  width: 50px;
+  height: 30px;
+  background-image: url("../img/EEUU.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#listado-digimons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+#listado-digimons li {
+  background-color: #ffffff;
+  text-align: center;
+  list-style-type: none;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#listado-digimons li img {
+  width: 150px;
+  height: 150px;
+}
+#listado-digimons li:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgb(0, 0, 0);
+}
+#listado-digimons li.seleccionado {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgb(0, 0, 0);
+  animation: cambio-color-borde 5s infinite, flotacion 1.7s infinite;
+  border: 2px solid rgb(218, 8, 8);
+}
+
+@keyframes flotacion {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes cambio-color-borde {
+  0% {
+    border-color: rgba(255, 0, 0, 0.7);
+  }
+  25% {
+    border-color: rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    border-color: rgba(0, 0, 255, 0.7);
+  }
+  75% {
+    border-color: rgba(0, 217, 255, 0.7);
+  }
+}/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,105 @@
+body {
+    background: linear-gradient(to bottom, #25c4e0, #1e2bdd);
+    background-attachment: fixed;
+    overflow: auto !important;
+    padding-right: 0 !important;
+}
+
+#navbar {
+    position: sticky;
+    top: 0;
+    background-color: #f0f0f0;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+
+    img {
+        width: 170px;
+        height: 80px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: grey;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .nivel-japon {
+        width: 50px;
+        height: 30px;
+        background-image: url('../img/Japon.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .nivel-eeuu {
+        width: 50px;
+        height: 30px;
+        background-image: url('../img/EEUU.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}
+  
+  // Estilos para la lista
+  #listado-digimons {
+    display: flex; // Usa Flexbox para alinear los elementos
+    justify-content: center; // Centra horizontalmente los elementos <li>
+    flex-wrap: wrap; // Permite que los elementos <li> se envuelvan si no caben en una sola línea
+    padding: 0; // Elimina el padding predeterminado del <ul>
+    margin: 0; // Elimina el margen predeterminado del <ul>
+  
+    li {
+      background-color: #ffffff; // Fondo de los elementos <li>
+      text-align: center; // Centra el texto dentro de cada <li>
+      list-style-type: none; // Elimina las viñetas predeterminadas
+      margin: 10px; // Agrega espacio superior/inferior con 10px de margen
+      padding: 15px; // Aumenta el padding a 15px
+      border: 1px solid #ccc; // Color del borde unificado
+      border-radius: 8px; // Borde redondeado de 8px
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Sombra alrededor de los elementos
+      transition: transform 0.3s ease, box-shadow 0.3s ease; // Transiciones suaves
+  
+      img {
+        width: 150px;
+        height: 150px;
+      }
+  
+      &:hover {
+        transform: translateY(-8px); // Mueve la carta ligeramente hacia arriba
+        box-shadow: 0 8px 16px rgb(0, 0, 0); // Aumenta la sombra para darle un efecto de elevación
+      }
+  
+      &.seleccionado {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0);
+        animation: cambio-color-borde 5s infinite, flotacion 1.7s infinite; // Aplica ambas animaciones
+        border: 2px solid rgb(218, 8, 8); // Estilo de borde (ancho, tipo, color)
+      }
+    }
+  }
+
+// Animación para el movimiento vertical
+@keyframes flotacion {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+// Animación para cambiar el color del borde
+@keyframes cambio-color-borde {
+    0% { border-color: rgba(255, 0, 0, 0.7); } // Color rojo inicial
+    25% { border-color: rgba(0, 255, 0, 0.7); } // Color verde
+    50% { border-color: rgba(0, 0, 255, 0.7); } // Color azul
+    75% { border-color: rgba(0, 217, 255, 0.7); } // Color magenta
+}
+  
