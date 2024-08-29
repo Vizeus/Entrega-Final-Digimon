@@ -10,6 +10,9 @@ const barraProgreso = document.getElementById('carga');
 // Seleccionar el botón de cambiar niveles
 const botonCambiarNiveles = document.getElementById('cambiar-niveles');
 
+// Seleccionar el botón de iniciar combate
+const botonIniciarCombate = document.getElementById('iniciar-combate');
+
 // Número total de Digimons 
 const totalDigimons = 860;
 
@@ -114,6 +117,19 @@ let contadorDigimons = 0; // Contador de Digimons cargados
 // Array para almacenar los elementos seleccionados
 const seleccionados = [];
 
+// Función para manejar el boton de combate
+function verificarSeleccion() {
+    if (seleccionados.length === 2) {
+        botonIniciarCombate.classList.add("animate__animated", "animate__pulse");
+        botonIniciarCombate.disabled = false;
+        botonIniciarCombate.style.backgroundColor = 'green';
+    } else {
+        botonIniciarCombate.classList.remove("animate__animated", "animate__pulse");
+        botonIniciarCombate.disabled = true;
+        botonIniciarCombate.style.backgroundColor = 'grey';
+    }
+}
+
 // Función para crear la lista de Digimons
 async function crearListaDeDigimons() {
     try {
@@ -177,6 +193,8 @@ async function crearListaDeDigimons() {
                         seleccionados.splice(index, 1);
                     }
                 }
+                // Llamar a la función para verificar y actualizar el botón
+                verificarSeleccion();
             });
 
             // Agregamos el <li> a la lista de Digimons (<ul>)
@@ -185,6 +203,10 @@ async function crearListaDeDigimons() {
             // Actualizamos el contador y la barra de progreso
             contadorDigimons++;
             actualizarBarraProgreso(contadorDigimons);
+
+            // -----------------------------------------------------------------
+
+
         }
     } catch (error) {
         console.error('Error al crear la lista de Digimons:', error);
@@ -199,9 +221,6 @@ botonCambiarNiveles.addEventListener('click', () => {
 });
 
 // -----------------------------------------------------------------------------------------------------------------
-
-// Seleccionar el botón de iniciar combate
-const botonIniciarCombate = document.getElementById('iniciar-combate');
 
 // Función para iniciar el combate
 async function iniciarCombate() {
@@ -249,31 +268,55 @@ async function iniciarCombate() {
 
     const ganador = determinarGanador(tipo1, tipo2, nivel1Numerico, nivel2Numerico);
 
-    // Cuadros de SweetAlert2 de animación
+    // Cuadros de animación
+    try {
+        reproducirSonido(audioMouse)
+        reproducirPajita()
+        await Swal.fire({
+            title: `Preparando combate...`,
+            imageUrl: `./img/Trabajando.gif`,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Custom image"
+        });
+        detenerSonido(audioMouse); // Detiene el sonido después de que se cierra la primera ventana
+        detenerSonidoPajita();
+    } catch (error) {
+        detenerSonido(audioMouse); // Asegura que el sonido se detenga en caso de error
+        detenerSonidoPajita();
+    }
 
-    await Swal.fire({
-        title: `Preparando combate...`,
-        imageUrl: `./img/Trabajando.gif`,
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image"
-    });
+    try {
+        reproducirSonido(battleMusic)
+        await Swal.fire({
+            title: `¡Los Digimons están peleando!`,
+            imageUrl: `./img/Peleando.gif`,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Custom image"
+        });
+        detenerSonido(battleMusic);
+    } catch (error) {
+        detenerSonido(battleMusic);
+    }
 
-    await Swal.fire({
-        title: `¡Los Digimons están peleando!`,
-        imageUrl: `./img/Peleando.gif`,
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image"
-    });
-
-    await Swal.fire({
-        title: `¡El ganador es ${ganador}!`,
-        imageUrl: './img/Festejando.gif',
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image"
-    });
+    try {
+        reproducirSonido(winSound);
+        reproducirConDelay(); // Llama a la función con delay para reproducir winMusic
+        dialogoAbierto = true; // Marca que el diálogo está abierto
+        await Swal.fire({
+            title: `¡El ganador es ${ganador}!`,
+            imageUrl: './img/Festejando.gif',
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Custom image"
+        });
+        dialogoAbierto = false; // Marca que el diálogo está cerrado
+        detenerSonido(winMusic);
+    } catch (error) {
+        dialogoAbierto = false; // Asegura que el diálogo esté cerrado en caso de error
+        detenerSonido(winMusic);
+    }
 }
 
 // Función para determinar el ganador considerando los niveles
@@ -320,15 +363,123 @@ function determinarGanador(tipo1, tipo2, nivel1, nivel2) {
 // Agregar evento al botón de iniciar combate
 botonIniciarCombate.addEventListener('click', iniciarCombate);
 
-// Habilitar o deshabilitar el botón dependiendo de la cantidad de Digimons seleccionados
-listaDigimons.addEventListener('click', () => {
-    if (seleccionados.length !== 2) {
-        // Deshabilitar el botón si no hay exactamente 2 Digimons seleccionados
-        botonIniciarCombate.disabled = true;
-        botonIniciarCombate.style.backgroundColor = 'grey'
-    } else {
-        // Habilitar el botón si hay exactamente 2 Digimons seleccionados
-        botonIniciarCombate.disabled = false;
-        botonIniciarCombate.style.backgroundColor = 'green'
-    }
+// ------------------------------------------------------------------------------------------------------
+
+// Función para mostrar alertas 
+function mostrarInfo(titulo, texto) {
+    Swal.fire({
+        title: titulo,
+        text: texto,
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+    });
+}
+
+// Agregar eventos a los botones del menú desplegable
+document.getElementById('botonDatos').addEventListener('click', () => {
+    mostrarInfo('Datos 🔢', 'Los Datos son Digimon con habilidades equilibradas, fuertes contra Virus pero débiles frente a Vacuna.');
 });
+
+document.getElementById('botonVirus').addEventListener('click', () => {
+    mostrarInfo('Virus 👾', 'Los Virus tienen habilidades ofensivas, son fuertes contra Vacuna pero débiles frente a Datos.');
+});
+
+document.getElementById('botonVacuna').addEventListener('click', () => {
+    mostrarInfo('Vacuna 💉', 'Los Vacuna se destacan por sus habilidades defensivas, son fuertes contra Datos y débiles frente a Virus.');
+});
+
+document.getElementById('botonLibre').addEventListener('click', () => {
+    mostrarInfo('Libre 🕊️', 'Los Libres no tienen atributos definidos, por lo que son equilibrados en combate y no tienen debilidades particulares.');
+});
+
+document.getElementById('botonVariable').addEventListener('click', () => {
+    mostrarInfo('Variable 🔀', 'Los Variables son adaptables con habilidades cambiantes, capaces de ajustarse a diversas situaciones; pueden ser difíciles de predecir.');
+});
+
+document.getElementById('botonDesconocido').addEventListener('click', () => {
+    mostrarInfo('Desconocido ❓', 'Los Desconocidos tienen atributos no clasificados, lo que los hace inesperados en combate.');
+});
+
+// ------------------------------------------------------------------------------------------------------
+
+// Audios
+
+const audioMouse = new Audio('audio/Mouse.mp3');
+audioMouse.loop = true;
+
+const winMusic = new Audio('audio/Digimon World 3 - Victory.mp3');
+audioMouse.loop = true;
+
+const battleMusic = new Audio('audio/Digimon World - Earlygame Battle.mp3');
+audioMouse.loop = true;
+
+const winSound = new Audio('audio/Digimon World - PSX Battle Win.mp3');
+
+const audioPajita = new Audio('audio/Pajita.mp3');
+let intervaloSonido;
+
+function reproducirSonido(audio) {
+    audio.play();
+}
+
+function detenerSonido(audio) {
+    audio.pause();
+    audio.currentTime = 0; 
+}
+
+
+function reproducirPajita() {
+    intervaloSonido = setInterval(() => {
+        audioPajita.play();
+        setTimeout(() => {
+            audioPajita.pause();
+            audioPajita.currentTime = 0; 
+        }, 650);
+    }, 1500) 
+}
+
+
+function detenerSonidoPajita() {
+    clearInterval(intervaloSonido);
+    audioPajita.pause();
+    audioPajita.currentTime = 0; 
+}
+
+
+function reproducirConDelay() {
+    setTimeout(() => {
+        if (dialogoAbierto) {
+            winMusic.play();
+        }
+    }, 2450); 
+}
+
+// Manejador de eventos para el menú desplegable
+document.querySelectorAll('.dropdown-content a').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); // Evita que el enlace realice su acción por defecto
+
+        const tipo = this.getAttribute('data-tipo');
+        const descripcion = obtenerDescripcionTipo(tipo);
+
+        Swal.fire({
+            title: tipo,
+            text: descripcion,
+            icon: 'info',
+            confirmButtonText: 'Cerrar'
+        });
+    });
+});
+
+// Función para obtener la descripción del tipo
+function obtenerDescripcionTipo(tipo) {
+    const descripciones = {
+        'Data': 'Los Digimons del tipo Datos son conocidos por su capacidad para adaptarse a diferentes entornos. 🔢',
+        'Vaccine': 'Los Digimons del tipo Vacuna tienen habilidades especiales para combatir virus. 💉',
+        'Virus': 'Los Digimons del tipo Virus son conocidos por su naturaleza impredecible y a menudo agresiva. 👾',
+        'Free': 'Los Digimons del tipo Libre tienen menos restricciones y pueden tener una gran variedad de habilidades. 🕊️',
+        'Variable': 'Los Digimons del tipo Variable pueden cambiar de tipo o habilidades en diferentes circunstancias. 🔀',
+        'Unknown': 'El tipo Desconocido incluye Digimons cuyos atributos no se conocen claramente. ❓'
+    };
+    return descripciones[tipo] || 'Descripción no disponible.';
+}

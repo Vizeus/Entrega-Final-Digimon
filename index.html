@@ -6,8 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digimon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script defer src="./main.js"></script>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="./design/styles.css"/>
 </head>
 
@@ -15,13 +22,26 @@
 
 <!-- Barra de navegación sticky -->
 <nav id="navbar">
-    <img src="./img/DigimonLogo.png" alt="Logo de Digimon" title="Logo de Digimon">
-    <button id="cambiar-niveles" class="nivel-japon" title="Cambiar sist. de clasificación de niveles"></button>
+    <img src="./img/DigimonLogo.png" alt="Logo de Digimon" title="Logo de Digimon" class="animate__animated animate__bounce">
+    <button id="cambiar-niveles" class="nivel-japon botones" title="Cambiar sist. de clasificación de niveles"></button>
     <p>Elige 2 digimons con los que quieras simular un combate</p>
-    <!-- Botón para iniciar combate -->
-    <button id="iniciar-combate">Iniciar Combate</button>
 
-    <label for="carga">Progreso de la carga de Digimons</label>
+    <button class="menu-desplegable">
+      <p>Info. sobre tipos</p>                               
+      <ul>
+        <li id="botonDatos">Datos 🔢</li>
+        <li id="botonVirus">Virus 👾</li>
+        <li id="botonVacuna">Vacuna 💉</li>
+        <li id="botonLibre">Libre 🕊️</li>
+        <li id="botonVariable">Variable 🔀</li>
+        <li id="botonDesconocido">Desconocido ❓</li>
+      </ul>
+    </button>
+
+    <!-- Botón para iniciar combate -->
+    <button id="iniciar-combate" class="botones">Iniciar Combate</button>
+
+    <label for="carga">Progreso de la carga de Digimons:</label>
     <progress id="carga" value="" max=""></progress>
 </nav>
 
