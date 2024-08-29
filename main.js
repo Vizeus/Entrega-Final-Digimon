@@ -365,6 +365,8 @@ botonIniciarCombate.addEventListener('click', iniciarCombate);
 
 // ------------------------------------------------------------------------------------------------------
 
+// Menú desplagable
+
 // Función para mostrar alertas 
 function mostrarInfo(titulo, texto) {
     Swal.fire({
@@ -377,19 +379,19 @@ function mostrarInfo(titulo, texto) {
 
 // Agregar eventos a los botones del menú desplegable
 document.getElementById('botonDatos').addEventListener('click', () => {
-    mostrarInfo('Datos 🔢', 'Los Datos son Digimon con habilidades equilibradas, fuertes contra Virus pero débiles frente a Vacuna.');
+    mostrarInfo('Datos 🔢', 'Los Datos son Digimon con habilidades equilibradas, fuertes contra Vacuna pero débiles frente a Virus.');
 });
 
 document.getElementById('botonVirus').addEventListener('click', () => {
-    mostrarInfo('Virus 👾', 'Los Virus tienen habilidades ofensivas, son fuertes contra Vacuna pero débiles frente a Datos.');
+    mostrarInfo('Virus 👾', 'Los Virus tienen habilidades ofensivas, son fuertes contra Datos pero débiles frente a Vacuna.');
 });
 
 document.getElementById('botonVacuna').addEventListener('click', () => {
-    mostrarInfo('Vacuna 💉', 'Los Vacuna se destacan por sus habilidades defensivas, son fuertes contra Datos y débiles frente a Virus.');
+    mostrarInfo('Vacuna 💉', 'Los Vacuna se destacan por sus habilidades defensivas, son fuertes contra Virus y débiles frente a Datos.');
 });
 
 document.getElementById('botonLibre').addEventListener('click', () => {
-    mostrarInfo('Libre 🕊️', 'Los Libres no tienen atributos definidos, por lo que son equilibrados en combate y no tienen debilidades particulares.');
+    mostrarInfo('Libre 🕊️', 'Los Libres no tienen atributos definidos, por lo que son equilibrados en combate y no tienen debilidades ni fortalezas particulares.');
 });
 
 document.getElementById('botonVariable').addEventListener('click', () => {
@@ -454,32 +456,4 @@ function reproducirConDelay() {
     }, 2450); 
 }
 
-// Manejador de eventos para el menú desplegable
-document.querySelectorAll('.dropdown-content a').forEach(link => {
-    link.addEventListener('click', function(event) {
-        event.preventDefault(); // Evita que el enlace realice su acción por defecto
-
-        const tipo = this.getAttribute('data-tipo');
-        const descripcion = obtenerDescripcionTipo(tipo);
-
-        Swal.fire({
-            title: tipo,
-            text: descripcion,
-            icon: 'info',
-            confirmButtonText: 'Cerrar'
-        });
-    });
-});
-
-// Función para obtener la descripción del tipo
-function obtenerDescripcionTipo(tipo) {
-    const descripciones = {
-        'Data': 'Los Digimons del tipo Datos son conocidos por su capacidad para adaptarse a diferentes entornos. 🔢',
-        'Vaccine': 'Los Digimons del tipo Vacuna tienen habilidades especiales para combatir virus. 💉',
-        'Virus': 'Los Digimons del tipo Virus son conocidos por su naturaleza impredecible y a menudo agresiva. 👾',
-        'Free': 'Los Digimons del tipo Libre tienen menos restricciones y pueden tener una gran variedad de habilidades. 🕊️',
-        'Variable': 'Los Digimons del tipo Variable pueden cambiar de tipo o habilidades en diferentes circunstancias. 🔀',
-        'Unknown': 'El tipo Desconocido incluye Digimons cuyos atributos no se conocen claramente. ❓'
-    };
-    return descripciones[tipo] || 'Descripción no disponible.';
-}
+// --------------------------------------------------------------------------------------------------------
